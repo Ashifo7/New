@@ -1,1 +1,2 @@
 "Line 1: Original text" 
+"Line 2: Changes from branch-A" 
