@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Layout from '../components/layout/Layout';
 
 export default function ForgotPassword() {
   const [step, setStep] = useState(1); // 1: email, 2: otp+new password
@@ -62,48 +63,50 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '40px auto', padding: 24, border: '1px solid #eee', borderRadius: 8 }}>
-      <h2 style={{ textAlign: 'center' }}>Forgot Password</h2>
-      {step === 1 && (
-        <form onSubmit={handleEmailSubmit}>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-            style={{ width: '100%', marginBottom: 8, padding: 8 }}
-          />
-          <button type="submit" style={{ width: '100%', padding: 10 }} disabled={loading}>
-            {loading ? 'Sending OTP...' : 'Send OTP'}
-          </button>
-        </form>
-      )}
-      {step === 2 && (
-        <form onSubmit={handleResetSubmit}>
-          <input
-            type="text"
-            placeholder="Enter OTP"
-            value={otp}
-            onChange={e => setOtp(e.target.value)}
-            required
-            style={{ width: '100%', marginBottom: 8, padding: 8 }}
-          />
-          <input
-            type="password"
-            placeholder="New Password"
-            value={newPassword}
-            onChange={e => setNewPassword(e.target.value)}
-            required
-            style={{ width: '100%', marginBottom: 8, padding: 8 }}
-          />
-          <button type="submit" style={{ width: '100%', padding: 10 }} disabled={loading}>
-            {loading ? 'Resetting...' : 'Reset Password'}
-          </button>
-        </form>
-      )}
-      {error && <div style={{ color: 'red', marginTop: 12, textAlign: 'center' }}>{error}</div>}
-      {message && <div style={{ color: 'green', marginTop: 12, textAlign: 'center' }}>{message}</div>}
-    </div>
+    <Layout>
+      <div style={{ maxWidth: 400, margin: '40px auto', padding: 24, border: '1px solid #eee', borderRadius: 8 }}>
+        <h2 style={{ textAlign: 'center' }}>Forgot Password</h2>
+        {step === 1 && (
+          <form onSubmit={handleEmailSubmit}>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+              style={{ width: '100%', marginBottom: 8, padding: 8 }}
+            />
+            <button type="submit" style={{ width: '100%', padding: 10 }} disabled={loading}>
+              {loading ? 'Sending OTP...' : 'Send OTP'}
+            </button>
+          </form>
+        )}
+        {step === 2 && (
+          <form onSubmit={handleResetSubmit}>
+            <input
+              type="text"
+              placeholder="Enter OTP"
+              value={otp}
+              onChange={e => setOtp(e.target.value)}
+              required
+              style={{ width: '100%', marginBottom: 8, padding: 8 }}
+            />
+            <input
+              type="password"
+              placeholder="New Password"
+              value={newPassword}
+              onChange={e => setNewPassword(e.target.value)}
+              required
+              style={{ width: '100%', marginBottom: 8, padding: 8 }}
+            />
+            <button type="submit" style={{ width: '100%', padding: 10 }} disabled={loading}>
+              {loading ? 'Resetting...' : 'Reset Password'}
+            </button>
+          </form>
+        )}
+        {error && <div style={{ color: 'red', marginTop: 12, textAlign: 'center' }}>{error}</div>}
+        {message && <div style={{ color: 'green', marginTop: 12, textAlign: 'center' }}>{message}</div>}
+      </div>
+    </Layout>
   );
-} 
+}

@@ -11,7 +11,7 @@ const Card = ({
   return (
     <div 
       className={clsx(
-        'bg-white rounded-2xl shadow-soft border border-secondary-100 overflow-hidden transition-all duration-300 ease-out',
+        'bg-gray-800 rounded-2xl shadow-soft border border-primary-600/20 overflow-hidden transition-all duration-300 ease-out',
         interactive && 'hover:shadow-large hover:-translate-y-1 cursor-pointer',
         hover && 'hover:shadow-medium hover:-translate-y-0.5',
         className
@@ -32,10 +32,10 @@ const CardHeader = ({
   return (
     <div 
       className={clsx(
-        'px-6 py-5 border-b border-secondary-100',
+        'px-6 py-5 border-b border-primary-600/20 text-gray-100',
         gradient 
-          ? 'bg-gradient-to-r from-secondary-50 via-white to-primary-50/30' 
-          : 'bg-white',
+          ? 'bg-gradient-to-r from-gray-900 to-gray-800' 
+          : 'bg-gray-800',
         className
       )}
       {...props}
@@ -76,7 +76,7 @@ const CardFooter = ({
   return (
     <div 
       className={clsx(
-        'px-6 py-4 bg-secondary-50/50 border-t border-secondary-100',
+        'px-6 py-4 bg-gray-900/50 border-t border-primary-600/20 text-gray-100',
         className
       )}
       {...props}

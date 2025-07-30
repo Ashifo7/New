@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { EyeIcon, EyeSlashIcon, EnvelopeIcon, LockClosedIcon, HeartIcon } from '@heroicons/react/24/outline';
 import ContinueWithGoogle from './ContinueWithGoogle';
+import Layout from '../components/layout/Layout';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import Card from '../components/ui/Card';
@@ -15,7 +16,7 @@ export default function Login() {
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
-      navigate('/profile-complete');
+      navigate('/landing');
     }
   }, [navigate]);
 
@@ -40,7 +41,7 @@ export default function Login() {
       if (!data.success) throw new Error(data.error || 'Login failed');
       
       localStorage.setItem('token', data.token);
-      navigate('/profile-complete');
+      navigate('/landing');
     } catch (err) {
       setError(err.message);
     } finally {
@@ -49,7 +50,8 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <Layout>
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 -mt-8">
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center animate-fade-in-up">
@@ -58,11 +60,11 @@ export default function Login() {
               <HeartIcon className="h-8 w-8 text-white" />
             </div>
           </div>
-          <h2 className="text-3xl font-bold text-secondary-900 text-balance">
+          <h2 className="text-3xl font-display font-bold text-gray-100 text-balance">
             Welcome back to
             <span className="block gradient-text">StudyBuddy</span>
           </h2>
-          <p className="mt-3 text-secondary-600">
+          <p className="mt-3 text-gray-300 font-body">
             Sign in to continue your learning journey
           </p>
         </div>
@@ -121,10 +123,10 @@ export default function Login() {
             
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-secondary-200" />
+                <div className="w-full border-t border-gray-600" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-secondary-500 font-medium">Or continue with</span>
+                <span className="px-4 bg-gray-900 text-gray-400 font-medium font-body">Or continue with</span>
               </div>
             </div>
             
@@ -133,15 +135,15 @@ export default function Login() {
             <div className="text-center space-y-3">
               <Link 
                 to="/forgot-password" 
-                className="text-sm text-primary-600 hover:text-primary-700 font-medium transition-colors duration-200 hover:underline"
+                className="text-sm text-primary-400 hover:text-primary-300 font-medium transition-colors duration-200 hover:underline font-body"
               >
                 Forgot your password?
               </Link>
-              <div className="text-sm text-secondary-600">
+              <div className="text-sm text-gray-400 font-body">
                 Don't have an account?{' '}
                 <Link 
                   to="/signup" 
-                  className="text-primary-600 hover:text-primary-700 font-semibold transition-colors duration-200 hover:underline"
+                  className="text-primary-400 hover:text-primary-300 font-semibold transition-colors duration-200 hover:underline"
                 >
                   Sign up
                 </Link>
@@ -151,10 +153,11 @@ export default function Login() {
         </Card>
         
         {/* Footer */}
-        <div className="text-center text-xs text-secondary-500 animate-fade-in">
+        <div className="text-center text-xs text-gray-500 animate-fade-in font-body">
           <p>By signing in, you agree to our Terms of Service and Privacy Policy</p>
         </div>
       </div>
-    </div>
+      </div>
+    </Layout>
   );
 }

@@ -12,13 +12,13 @@ const Badge = ({
   ...props 
 }) => {
   const variants = {
-    default: 'bg-secondary-100 text-secondary-800 hover:bg-secondary-200',
+    default: 'bg-gray-700 text-gray-200 hover:bg-gray-600',
     primary: 'bg-primary-100 text-primary-800 hover:bg-primary-200',
     success: 'bg-success-100 text-success-800 hover:bg-success-200',
     warning: 'bg-warning-100 text-warning-800 hover:bg-warning-200',
     danger: 'bg-danger-100 text-danger-800 hover:bg-danger-200',
-    outline: 'bg-transparent border border-secondary-300 text-secondary-700 hover:bg-secondary-50',
-    'outline-primary': 'bg-transparent border border-primary-300 text-primary-700 hover:bg-primary-50',
+    outline: 'bg-transparent border border-primary-600/30 text-gray-300 hover:bg-gray-800/50',
+    'outline-primary': 'bg-transparent border border-primary-500 text-primary-400 hover:bg-primary-950/30',
   };
   
   const sizes = {
@@ -31,7 +31,7 @@ const Badge = ({
   return (
     <span
       className={clsx(
-        'inline-flex items-center font-medium rounded-full transition-all duration-200 ease-out',
+        'inline-flex items-center font-medium rounded-full transition-all duration-200 ease-out font-body',
         variants[variant],
         sizes[size],
         removable && 'pr-1',

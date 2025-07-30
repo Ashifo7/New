@@ -8,6 +8,7 @@ import ForgotPassword from './auth/ForgotPassword';
 import ProfileComplete from './pages/ProfileComplete';
 import Home from './pages/Home';
 import Matches from './pages/Matches';
+import Landing from './pages/Landing';
 import OAuthCallback from './auth/OAuthCallback';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/landing" element={<Landing />} />
         <Route path="/profile-complete" element={<ProfileComplete />} />
         <Route path="/home" element={<Home />} />
         <Route path="/matches" element={<Matches />} />

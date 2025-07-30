@@ -13,13 +13,12 @@ const Button = ({
   fullWidth = false,
   ...props 
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center font-semibold transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none group';
-  
+  const baseClasses = 'inline-flex items-center justify-center font-semibold font-display transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none group';
   const variants = {
-    primary: 'bg-gradient-to-r from-primary-600 to-primary-700 text-white hover:from-primary-700 hover:to-primary-800 hover:shadow-medium hover:-translate-y-0.5 active:translate-y-0 focus:ring-primary-500 shadow-soft',
-    secondary: 'bg-white text-secondary-700 border border-secondary-200 hover:bg-secondary-50 hover:border-secondary-300 hover:shadow-medium hover:-translate-y-0.5 active:translate-y-0 focus:ring-primary-500 shadow-soft',
+    primary: 'bg-gradient-to-r from-primary-600 to-primary-700 text-white hover:from-primary-500 hover:to-primary-600 hover:shadow-glow hover:-translate-y-0.5 active:translate-y-0 focus:ring-primary-500 shadow-soft',
+    secondary: 'bg-gray-800 text-gray-200 border border-primary-600/30 hover:bg-gray-700 hover:border-primary-500 hover:shadow-medium hover:-translate-y-0.5 active:translate-y-0 focus:ring-primary-500 shadow-soft',
     danger: 'bg-gradient-to-r from-danger-600 to-danger-700 text-white hover:from-danger-700 hover:to-danger-800 hover:shadow-medium hover:-translate-y-0.5 active:translate-y-0 focus:ring-danger-500 shadow-soft',
-    ghost: 'bg-transparent text-secondary-700 hover:bg-secondary-100 hover:text-secondary-900 focus:ring-primary-500',
+    ghost: 'bg-transparent text-gray-300 hover:bg-gray-800/50 hover:text-gray-100 focus:ring-primary-500',
     success: 'bg-gradient-to-r from-success-600 to-success-700 text-white hover:from-success-700 hover:to-success-800 hover:shadow-medium hover:-translate-y-0.5 active:translate-y-0 focus:ring-success-500 shadow-soft',
   };
   

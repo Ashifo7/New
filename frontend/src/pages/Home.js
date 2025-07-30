@@ -146,7 +146,7 @@ export default function Home() {
   if (loading) {
     return (
       <Layout user={currentUser}>
-        <div className="flex items-center justify-center min-h-96">
+        <div className="flex items-center justify-center min-h-96 bg-gray-900">
           <div className="text-center space-y-4">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
             <p className="text-secondary-600">Finding your perfect study matches...</p>
@@ -163,14 +163,14 @@ export default function Home() {
         <div className="text-center space-y-4 animate-fade-in-up">
           <div className="flex items-center justify-center space-x-3">
             <SparklesIcon className="h-8 w-8 text-primary-600" />
-            <h1 className="text-4xl font-bold gradient-text">Discover Study Partners</h1>
+            <h1 className="text-4xl font-display font-bold gradient-text">Discover Study Partners</h1>
           </div>
-          <p className="text-lg text-secondary-600 max-w-2xl mx-auto text-balance">
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto text-balance font-body">
             Find your perfect study match and accelerate your learning journey together
           </p>
           
           <div className="flex items-center justify-center space-x-6 pt-4">
-            <div className="flex items-center space-x-2 text-sm text-secondary-600">
+            <div className="flex items-center space-x-2 text-sm text-gray-400 font-body">
               <UserGroupIcon className="h-5 w-5 text-primary-500" />
               <span>{users.length} potential matches</span>
             </div>
@@ -192,8 +192,8 @@ export default function Home() {
             <Card.Header gradient>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
-                  <AdjustmentsHorizontalIcon className="h-5 w-5 text-secondary-700" />
-                  <h3 className="text-lg font-semibold text-secondary-900">Filter Options</h3>
+                  <AdjustmentsHorizontalIcon className="h-5 w-5 text-gray-200" />
+                  <h3 className="text-lg font-display font-semibold text-gray-100">Filter Options</h3>
                 </div>
                 <Button
                   variant="ghost"
@@ -206,7 +206,7 @@ export default function Home() {
             <Card.Body>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-secondary-700">Subject</label>
+                  <label className="block text-sm font-semibold text-gray-200 font-display">Subject</label>
                   <input
                     list="subject-list"
                     value={filters.subjectsInterested || ''}
@@ -220,7 +220,7 @@ export default function Home() {
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-secondary-700">Language</label>
+                  <label className="block text-sm font-semibold text-gray-200 font-display">Language</label>
                   <select
                     value={filters['personalInfo.languages'] || ''}
                     onChange={e => setFilters(f => ({ ...f, 'personalInfo.languages': e.target.value }))}
@@ -234,7 +234,7 @@ export default function Home() {
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-secondary-700">Gender</label>
+                  <label className="block text-sm font-semibold text-gray-200 font-display">Gender</label>
                   <select
                     value={filters['personalInfo.gender'] || ''}
                     onChange={e => setFilters(f => ({ ...f, 'personalInfo.gender': e.target.value }))}
@@ -248,7 +248,7 @@ export default function Home() {
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-secondary-700">City</label>
+                  <label className="block text-sm font-semibold text-gray-200 font-display">City</label>
                   <input
                     list="city-list"
                     value={filters['location.city'] || ''}
@@ -262,7 +262,7 @@ export default function Home() {
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-secondary-700">State</label>
+                  <label className="block text-sm font-semibold text-gray-200 font-display">State</label>
                   <input
                     list="state-list"
                     value={filters['location.state'] || ''}
@@ -276,7 +276,7 @@ export default function Home() {
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-secondary-700">Study Time</label>
+                  <label className="block text-sm font-semibold text-gray-200 font-display">Study Time</label>
                   <input
                     list="studytime-list"
                     value={filters['studyTime'] || ''}
@@ -290,22 +290,22 @@ export default function Home() {
                 </div>
               </div>
               
-              <div className="flex items-center justify-between mt-6 pt-6 border-t border-secondary-200">
+              <div className="flex items-center justify-between mt-6 pt-6 border-t border-gray-600">
                 <label className="flex items-center space-x-3">
                   <input
                     type="checkbox"
                     checked={showRated}
                     onChange={e => setShowRated(e.target.checked)}
-                    className="rounded border-secondary-300 text-primary-600 focus:ring-primary-500 h-4 w-4"
+                    className="rounded border-gray-500 text-primary-600 focus:ring-primary-500 h-4 w-4"
                   />
-                  <span className="text-sm font-medium text-secondary-700">Show rated users</span>
+                  <span className="text-sm font-medium text-gray-200 font-body">Show rated users</span>
                 </label>
                 
                 <Button
                   variant="ghost"
                   onClick={() => setFilters({})}
                   size="sm"
-                  className="text-secondary-600 hover:text-secondary-900"
+                  className="text-gray-400 hover:text-gray-200"
                 >
                   Clear all filters
                 </Button>
@@ -333,8 +333,8 @@ export default function Home() {
                   </div>
                   
                   <div className="space-y-3">
-                    <h2 className="text-2xl font-bold text-secondary-900">{current.name}</h2>
-                    <div className="flex items-center justify-center space-x-4 text-sm text-secondary-600">
+                    <h2 className="text-2xl font-display font-bold text-gray-100">{current.name}</h2>
+                    <div className="flex items-center justify-center space-x-4 text-sm text-gray-300 font-body">
                       {current.personalInfo?.age && (
                         <div className="flex items-center space-x-1">
                           <span className="font-medium">{current.personalInfo.age}</span>
@@ -349,7 +349,7 @@ export default function Home() {
                     </div>
                     
                     {(current.location?.city || current.location?.state) && (
-                      <div className="flex items-center justify-center space-x-1 text-secondary-600">
+                      <div className="flex items-center justify-center space-x-1 text-gray-300 font-body">
                         <MapPinIcon className="h-4 w-4" />
                         <span className="text-sm">
                           {current.location.city}{current.location.city && current.location.state && ', '}{current.location.state}
@@ -361,7 +361,7 @@ export default function Home() {
                   <div className="space-y-4">
                     {Array.isArray(current.subjectsInterested) && current.subjectsInterested.length > 0 && (
                       <div className="space-y-2">
-                        <p className="text-sm font-semibold text-secondary-700 flex items-center justify-center space-x-1">
+                        <p className="text-sm font-semibold text-gray-200 flex items-center justify-center space-x-1 font-display">
                           <SparklesIcon className="h-4 w-4" />
                           <span>Subjects</span>
                         </p>
@@ -382,7 +382,7 @@ export default function Home() {
                     
                     {Array.isArray(current.personalInfo?.languages) && current.personalInfo.languages.length > 0 && (
                       <div className="space-y-2">
-                        <p className="text-sm font-semibold text-secondary-700">Languages</p>
+                        <p className="text-sm font-semibold text-gray-200 font-display">Languages</p>
                         <div className="flex flex-wrap gap-2 justify-center">
                           {current.personalInfo.languages.slice(0, 3).map(lang => (
                             <Badge key={lang} variant="default" size="sm">
@@ -400,7 +400,7 @@ export default function Home() {
                     
                     {current.studyTime && (
                       <div className="space-y-2">
-                        <p className="text-sm font-semibold text-secondary-700 flex items-center justify-center space-x-1">
+                        <p className="text-sm font-semibold text-gray-200 flex items-center justify-center space-x-1 font-display">
                           <ClockIcon className="h-4 w-4" />
                           <span>Preferred Study Time</span>
                         </p>
@@ -443,8 +443,8 @@ export default function Home() {
                   <HeartIcon className="h-12 w-12 text-primary-600" />
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-2xl font-bold text-secondary-900">No more profiles</h3>
-                  <p className="text-secondary-600 max-w-md mx-auto text-balance">
+                  <h3 className="text-2xl font-display font-bold text-gray-100">No more profiles</h3>
+                  <p className="text-gray-300 max-w-md mx-auto text-balance font-body">
                     {message || 'You\'ve seen all available study partners. Check back later for new matches!'}
                   </p>
                 </div>
@@ -462,17 +462,17 @@ export default function Home() {
         ) : (
           <div className="space-y-6 animate-fade-in">
             <div className="text-center">
-              <h2 className="text-2xl font-bold text-secondary-900">Rated Users</h2>
-              <p className="text-secondary-600 mt-2">Users you've already interacted with</p>
+              <h2 className="text-2xl font-display font-bold text-gray-100">Rated Users</h2>
+              <p className="text-gray-300 mt-2 font-body">Users you've already interacted with</p>
             </div>
             
             {ratedUsers.length === 0 ? (
               <div className="text-center py-16">
                 <div className="space-y-4">
-                  <div className="flex items-center justify-center w-16 h-16 bg-secondary-100 rounded-full mx-auto">
-                    <UserGroupIcon className="h-8 w-8 text-secondary-400" />
+                  <div className="flex items-center justify-center w-16 h-16 bg-gray-700 rounded-full mx-auto">
+                    <UserGroupIcon className="h-8 w-8 text-gray-400" />
                   </div>
-                  <p className="text-secondary-600">
+                  <p className="text-gray-300 font-body">
                     {Object.values(filters).some(Boolean) ? 'No rated users match your filters.' : 'No rated users yet.'}
                   </p>
                 </div>
@@ -490,8 +490,8 @@ export default function Home() {
                       />
                       
                       <div className="space-y-2">
-                        <h3 className="font-semibold text-secondary-900">{user.name}</h3>
-                        <div className="flex items-center justify-center space-x-2 text-sm text-secondary-600">
+                        <h3 className="font-semibold text-gray-100 font-display">{user.name}</h3>
+                        <div className="flex items-center justify-center space-x-2 text-sm text-gray-300 font-body">
                           {user.personalInfo?.age && <span>{user.personalInfo.age} years</span>}
                           }
                           {user.personalInfo?.gender && (
@@ -502,7 +502,7 @@ export default function Home() {
                           )}
                         </div>
                         {(user.location?.city || user.location?.state) && (
-                          <div className="flex items-center justify-center space-x-1 text-sm text-secondary-600">
+                          <div className="flex items-center justify-center space-x-1 text-sm text-gray-300 font-body">
                             <MapPinIcon className="h-3 w-3" />
                             <span>
                               {user.location.city}{user.location.city && user.location.state && ', '}{user.location.state}
