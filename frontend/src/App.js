@@ -23,7 +23,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/matches" element={<Matches />} />
         <Route path="/oauth-callback" element={<OAuthCallback />} />
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/" element={<Navigate to="/landing" replace />} />
       </Routes>
     </Router>
   );

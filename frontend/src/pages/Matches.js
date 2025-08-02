@@ -20,7 +20,7 @@ import {
 } from '@heroicons/react/24/outline';
 import {
   ChatBubbleLeftRightIcon as ChatBubbleLeftRightSolidIcon,
-  HeartIcon as HeartSolidIcon,
+  BookOpenIcon as BookOpenSolidIcon,
   StarIcon as StarSolidIcon
 } from '@heroicons/react/24/solid';
 import Layout from '../components/layout/Layout';
@@ -675,7 +675,7 @@ export default function Matches() {
   if (loading) {
     return (
       <Layout user={currentUser}>
-        <div className="bg-gray-900 min-h-screen">
+        <div className="bg-gray-900 grid-bg min-h-screen">
           <LoadingSpinner message="Loading your conversations..." />
         </div>
       </Layout>
@@ -710,7 +710,7 @@ export default function Matches() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 h-full bg-gray-800 rounded-2xl shadow-large overflow-hidden border border-primary-600/20">
           {/* Matches List */}
-          <div className={`lg:col-span-1 border-r border-secondary-200 ${selectedMatch ? 'hidden lg:block' : 'block'}`}>
+          <div className={`lg:col-span-1 border-r border-secondary-200 grid-bg-subtle ${selectedMatch ? 'hidden lg:block' : 'block'}`}>
             <div className="p-6 border-b border-gray-700 bg-gradient-to-r from-gray-800 to-gray-700">
               <div className="flex items-center justify-between">
                 <div>
@@ -778,7 +778,7 @@ export default function Matches() {
                       <Button
                         variant="primary"
                         onClick={() => navigate('/home')}
-                        icon={HeartSolidIcon}
+                        icon={BookOpenSolidIcon}
                         className="shadow-medium"
                       >
                         Find Study Partners
@@ -812,7 +812,7 @@ export default function Matches() {
                 />
 
                 {/* Messages Area */}
-                <div className="flex-1 overflow-y-auto p-6 bg-gradient-to-b from-gray-900/30 to-gray-800">
+                <div className="flex-1 overflow-y-auto p-6 bg-gradient-to-b from-gray-900/30 to-gray-800 grid-bg-subtle">
                   {error && (
                     <div className="mb-4 p-4 bg-danger-50 border border-danger-200 rounded-xl flex items-center space-x-3 animate-fade-in">
                       <ExclamationTriangleIcon className="h-5 w-5 text-danger-600 flex-shrink-0" />
@@ -823,7 +823,7 @@ export default function Matches() {
                   {/* Welcome Message */}
                   <div className="text-center mb-6">
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-primary-100 to-primary-200 rounded-full mb-4">
-                      <HeartSolidIcon className="h-8 w-8 text-primary-600" />
+                      <BookOpenSolidIcon className="h-8 w-8 text-primary-600" />
                     </div>
                     <h3 className="text-lg font-semibold text-gray-100 mb-2 font-display">
                       You matched with {selectedMatch.user.name}!

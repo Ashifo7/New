@@ -18,6 +18,11 @@
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-image: 
+      linear-gradient(rgba(147, 51, 234, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(147, 51, 234, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-attachment: fixed;
   }
   
   input, textarea, select {
@@ -79,6 +84,28 @@
 
   .text-muted-contrast {
     @apply text-gray-300;
+  }
+
+  /* Grid background utilities */
+  .grid-bg {
+    background-image: 
+      linear-gradient(rgba(147, 51, 234, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(147, 51, 234, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .grid-bg-subtle {
+    background-image: 
+      linear-gradient(rgba(147, 51, 234, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(147, 51, 234, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  .grid-bg-dense {
+    background-image: 
+      linear-gradient(rgba(147, 51, 234, 0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(147, 51, 234, 0.15) 1px, transparent 1px);
+    background-size: 15px 15px;
   }
 }
 

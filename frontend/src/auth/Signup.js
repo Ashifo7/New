@@ -6,17 +6,24 @@ import {
   UserIcon,
   EnvelopeIcon,
   LockClosedIcon,
-  HeartIcon,
+  BookOpenIcon, // Used for the app icon
   CheckCircleIcon
 } from '@heroicons/react/24/outline';
+
+// Assuming these components are available in the project
 import ContinueWithGoogle from './ContinueWithGoogle';
 import Layout from '../components/layout/Layout';
-import { ensureUserKeyPair } from './keyManager';
+import { ensureUserKeyPair } from './keyManager'; // Assuming this utility exists
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import Card from '../components/ui/Card';
 
+/**
+ * Signup component for user registration and OTP verification.
+ * Handles form state, API calls for registration and OTP, and navigation.
+ */
 export default function Signup() {
+  // State for form inputs
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
@@ -25,35 +32,57 @@ export default function Signup() {
     gender: '',
     password: ''
   });
+  // State to manage the current step of the signup process (1: registration, 2: OTP verification)
   const [step, setStep] = useState(1);
+  // State for OTP input
   const [otp, setOtp] = useState('');
+  // State for loading indicator during API calls
   const [loading, setLoading] = useState(false);
+  // State for displaying error messages
   const [error, setError] = useState('');
+  // State to toggle password visibility
   const [showPassword, setShowPassword] = useState(false);
+
+  // React Router hook for navigation
   const navigate = useNavigate();
 
+  /**
+   * Effect hook to check for existing token on component mount.
+   * If a token is found, navigate to '/landing'.
+   */
   useEffect(() => {
     if (localStorage.getItem('token')) {
-      navigate('/profile-complete');
+      navigate('/landing'); // Redirect to landing if already authenticated
     }
-  }, [navigate]);
+  }, [navigate]); // Dependency array ensures effect runs only when navigate changes
 
+  /**
+   * Handles changes in form input fields.
+   * Updates the form state and clears any existing error message.
+   * @param {Object} e - The event object from the input change.
+   */
   const handleChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    if (error) setError('');
+    if (error) setError(''); // Clear error when user starts typing
   };
 
+  /**
+   * Handles the submission of the registration form (Step 1).
+   * Sends user data to the registration API.
+   * @param {Object} e - The event object from the form submission.
+   */
   const handleSubmit = async e => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
+    e.preventDefault(); // Prevent default form submission behavior
+    setError(''); // Clear previous errors
+    setLoading(true); // Show loading indicator
 
     try {
-      const name = form.firstName + ' ' + form.lastName;
+      const name = `${form.firstName} ${form.lastName}`; // Combine first and last name
       const payload = {
         name,
         email: form.email,
         password: form.password,
+        // Default values for other fields as per the original code
         subjectsInterested: ['General'],
         studyTime: 'evening',
         location: {
@@ -65,6 +94,7 @@ export default function Signup() {
         }
       };
 
+      // API call to register the user
       const res = await fetch('/api/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -72,22 +102,31 @@ export default function Signup() {
       });
       const data = await res.json();
 
-      if (!data.success) throw new Error(data.error || 'Registration failed');
+      // Check if registration was successful
+      if (!data.success) {
+        throw new Error(data.error || 'Registration failed. Please try again.');
+      }
 
-      setStep(2);
+      setStep(2); // Move to OTP verification step
     } catch (err) {
-      setError(err.message);
+      setError(err.message); // Display error message
     } finally {
-      setLoading(false);
+      setLoading(false); // Hide loading indicator
     }
   };
 
+  /**
+   * Handles the submission of the OTP verification form (Step 2).
+   * Sends the entered OTP to the verification API.
+   * @param {Object} e - The event object from the form submission.
+   */
   const handleOtpSubmit = async e => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
+    e.preventDefault(); // Prevent default form submission behavior
+    setError(''); // Clear previous errors
+    setLoading(true); // Show loading indicator
 
     try {
+      // API call to verify OTP
       const res = await fetch('/api/users/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -95,15 +134,18 @@ export default function Signup() {
       });
       const data = await res.json();
 
-      if (!data.success) throw new Error(data.error || 'OTP verification failed');
+      // Check if OTP verification was successful
+      if (!data.success) {
+        throw new Error(data.error || 'OTP verification failed. Please check the code and try again.');
+      }
 
-      localStorage.setItem('token', data.token);
-      await ensureUserKeyPair(data.token);
-      navigate('/landing');
+      localStorage.setItem('token', data.token); // Store the received token
+      await ensureUserKeyPair(data.token); // Ensure user key pair is generated/managed
+      navigate('/landing'); // Navigate to the landing page upon successful verification
     } catch (err) {
-      setError(err.message);
+      setError(err.message); // Display error message
     } finally {
-      setLoading(false);
+      setLoading(false); // Hide loading indicator
     }
   };
 
@@ -111,13 +153,16 @@ export default function Signup() {
     <Layout>
       <div className="min-h-screen bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 -mt-8">
         <div className="max-w-md w-full space-y-8">
-          {/* Header */}
+          {/* Header Section */}
           <div className="text-center animate-fade-in-up">
             <div className="flex items-center justify-center mb-6">
+              {/* Application Icon */}
               <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl shadow-large floating">
-                <HeartIcon className="h-8 w-8 text-white" />
+                {/* Changed HeartIcon to BookOpenIcon for consistency with StudyBuddy theme */}
+                <BookOpenIcon className="h-8 w-8 text-white" />
               </div>
             </div>
+            {/* Dynamic Header Text based on current step */}
             <h2 className="text-3xl font-display font-bold text-gray-100 text-balance">
               {step === 1 ? (
                 <>
@@ -132,6 +177,7 @@ export default function Signup() {
                 </>
               )}
             </h2>
+            {/* Dynamic Sub-header Text based on current step */}
             <p className="mt-3 text-gray-300 font-body">
               {step === 1
                 ? 'Create your account and find your perfect study partner'
@@ -140,12 +186,14 @@ export default function Signup() {
             </p>
           </div>
 
+          {/* Card containing the form */}
           <Card className="animate-fade-in-up shadow-large" hover>
             <Card.Body className="space-y-6" padding="lg">
               {step === 1 ? (
+                // Registration Form (Step 1)
                 <>
                   <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <Input
                         name="firstName"
                         label="First Name"
@@ -177,7 +225,7 @@ export default function Signup() {
                       icon={EnvelopeIcon}
                     />
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <Input
                         name="age"
                         type="number"
@@ -190,10 +238,11 @@ export default function Signup() {
                         max="100"
                       />
                       <div className="space-y-2">
-                        <label className="block text-sm font-semibold text-gray-200 font-display">
+                        <label htmlFor="gender" className="block text-sm font-semibold text-gray-200 font-display">
                           Gender <span className="text-danger-500 ml-1">*</span>
                         </label>
                         <select
+                          id="gender" // Added id for accessibility
                           name="gender"
                           value={form.gender}
                           onChange={handleChange}
@@ -203,7 +252,7 @@ export default function Signup() {
                           <option value="">Select</option>
                           <option value="male">Male</option>
                           <option value="female">Female</option>
-                          <option value="confused">Other</option>
+                          <option value="other">Other</option> {/* Changed 'confused' to 'other' for clarity */}
                         </select>
                       </div>
                     </div>
@@ -221,10 +270,12 @@ export default function Signup() {
                         icon={LockClosedIcon}
                         helperText="Must be at least 6 characters long"
                       />
+                      {/* Button to toggle password visibility */}
                       <button
                         type="button"
                         className="absolute right-4 top-11 text-secondary-400 hover:text-secondary-600 transition-colors duration-200"
                         onClick={() => setShowPassword(!showPassword)}
+                        aria-label={showPassword ? 'Hide password' : 'Show password'} // Added aria-label for accessibility
                       >
                         {showPassword ? (
                           <EyeSlashIcon className="h-5 w-5" />
@@ -234,10 +285,12 @@ export default function Signup() {
                       </button>
                     </div>
 
+                    {/* Error Message Display */}
                     {error && (
                       <div className="bg-danger-50 border border-danger-200 rounded-xl p-4 animate-fade-in">
                         <div className="flex items-center">
                           <div className="flex-shrink-0">
+                            {/* Error Icon */}
                             <svg className="h-5 w-5 text-danger-400" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                             </svg>
@@ -249,6 +302,7 @@ export default function Signup() {
                       </div>
                     )}
 
+                    {/* Submit Button for Registration */}
                     <Button
                       type="submit"
                       fullWidth
@@ -260,6 +314,7 @@ export default function Signup() {
                     </Button>
                   </form>
 
+                  {/* Separator for "Or continue with" */}
                   <div className="relative">
                     <div className="absolute inset-0 flex items-center">
                       <div className="w-full border-t border-gray-600" />
@@ -269,15 +324,17 @@ export default function Signup() {
                     </div>
                   </div>
 
+                  {/* Google Sign-in Component */}
                   <ContinueWithGoogle />
                 </>
               ) : (
+                // OTP Verification Form (Step 2)
                 <form onSubmit={handleOtpSubmit} className="space-y-6">
                   <div className="text-center">
+                    {/* Success Icon for OTP */}
                     <div className="flex items-center justify-center w-16 h-16 bg-success-100 rounded-full mx-auto mb-4">
                       <CheckCircleIcon className="h-8 w-8 text-success-600" />
                     </div>
-                    {/* Corrected nested p tags */}
                     <p className="text-sm text-gray-300 mb-6 font-body">
                       Enter the verification code we sent to your email
                     </p>
@@ -291,13 +348,15 @@ export default function Signup() {
                     onChange={e => setOtp(e.target.value)}
                     required
                     maxLength="6"
-                    className="text-center text-lg tracking-widest font-mono"
+                    className="text-center text-lg tracking-widest font-mono" // Styling for OTP input
                   />
 
+                  {/* Error Message Display for OTP */}
                   {error && (
                     <div className="bg-danger-50 border border-danger-200 rounded-xl p-4 animate-fade-in">
                       <div className="flex items-center">
                         <div className="flex-shrink-0">
+                          {/* Error Icon */}
                           <svg className="h-5 w-5 text-danger-400" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                           </svg>
@@ -309,6 +368,7 @@ export default function Signup() {
                     </div>
                   )}
 
+                  {/* Submit Button for OTP Verification */}
                   <Button
                     type="submit"
                     fullWidth
@@ -318,6 +378,7 @@ export default function Signup() {
                     {loading ? 'Verifying...' : 'Verify Email'}
                   </Button>
 
+                  {/* Button to go back to registration */}
                   <Button
                     type="button"
                     variant="ghost"
@@ -330,6 +391,7 @@ export default function Signup() {
                 </form>
               )}
 
+              {/* Link to Login Page */}
               <div className="text-center text-sm text-gray-400 font-body">
                 Already have an account?{' '}
                 <Link
@@ -342,7 +404,7 @@ export default function Signup() {
             </Card.Body>
           </Card>
 
-          {/* Footer */}
+          {/* Footer Text */}
           <div className="text-center text-xs text-gray-500 animate-fade-in font-body">
             <p>By creating an account, you agree to our Terms of Service and Privacy Policy</p>
           </div>

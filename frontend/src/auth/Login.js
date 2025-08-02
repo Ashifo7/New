@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { EyeIcon, EyeSlashIcon, EnvelopeIcon, LockClosedIcon, HeartIcon } from '@heroicons/react/24/outline';
+import { BookOpenIcon } from '@heroicons/react/24/outline';
 import ContinueWithGoogle from './ContinueWithGoogle';
 import Layout from '../components/layout/Layout';
 import Button from '../components/ui/Button';
@@ -51,13 +52,13 @@ export default function Login() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 -mt-8">
+      <div className="min-h-screen bg-gray-900 grid-bg flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 -mt-8">
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center animate-fade-in-up">
           <div className="flex items-center justify-center mb-6">
             <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl shadow-large floating">
-              <HeartIcon className="h-8 w-8 text-white" />
+              <BookOpenIcon className="h-8 w-8 text-white" />
             </div>
           </div>
           <h2 className="text-3xl font-display font-bold text-gray-100 text-balance">

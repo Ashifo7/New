@@ -1,27 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import {
-  HeartIcon,
+  BookOpenIcon,
   SparklesIcon,
   AcademicCapIcon,
   UserGroupIcon,
-  BookOpenIcon,
   ArrowRightIcon,
   EnvelopeIcon,
   PhoneIcon,
   MapPinIcon,
   ChatBubbleLeftRightIcon,
-  UserIcon,
   InformationCircleIcon
 } from '@heroicons/react/24/outline';
-import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+import { BookOpenIcon as BookOpenSolidIcon } from '@heroicons/react/24/solid';
+
+// Assuming these components are available in the project
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import Layout from '../components/layout/Layout';
-import RotatingText from '../components/RotatingText';
-import Particles from '../components/Particles'; // Import the OGL Particles component
+import RotatingText from '../components/RotatingText'; // Component for rotating text effect
+import Particles from '../components/Particles'; // OGL Particles component for background animation
 
-// Quote component
+/**
+ * QuoteCard component displays a testimonial quote with author and role.
+ * @param {Object} props - Component props.
+ * @param {string} props.quote - The testimonial quote text.
+ * @param {string} props.author - The author of the quote.
+ * @param {string} props.role - The role or designation of the author.
+ * @param {number} [props.delay=0] - Animation delay in milliseconds.
+ */
 const QuoteCard = ({ quote, author, role, delay = 0 }) => (
   <Card
     className={`glass hover:shadow-glow transition-all duration-700 hover:-translate-y-2 animate-fade-in-up`}
@@ -40,7 +47,14 @@ const QuoteCard = ({ quote, author, role, delay = 0 }) => (
   </Card>
 );
 
-// Feature highlight component
+/**
+ * FeatureHighlight component displays a key feature with an icon, title, and description.
+ * @param {Object} props - Component props.
+ * @param {React.ComponentType} props.icon - The Heroicons component for the icon.
+ * @param {string} props.title - The title of the feature.
+ * @param {string} props.description - A brief description of the feature.
+ * @param {number} [props.delay=0] - Animation delay in milliseconds.
+ */
 const FeatureHighlight = ({ icon: Icon, title, description, delay = 0 }) => (
   <div
     className={`text-center space-y-6 animate-fade-in-up`}
@@ -54,7 +68,9 @@ const FeatureHighlight = ({ icon: Icon, title, description, delay = 0 }) => (
   </div>
 );
 
-// Contact section component
+/**
+ * ContactSection component provides contact information and a contact form.
+ */
 const ContactSection = () => (
   <section id="contact" className="py-24 bg-gray-800/50">
     <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
@@ -68,6 +84,7 @@ const ContactSection = () => (
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        {/* Contact Information */}
         <div className="space-y-8 animate-fade-in-up">
           <div className="space-y-6">
             <h3 className="text-2xl font-display font-bold text-gray-100 mb-8">
@@ -75,6 +92,7 @@ const ContactSection = () => (
             </h3>
 
             <div className="space-y-6">
+              {/* Email Contact */}
               <div className="flex items-start space-x-4">
                 <div className="flex items-center justify-center w-12 h-12 bg-primary-600/20 rounded-xl">
                   <EnvelopeIcon className="h-6 w-6 text-primary-400" />
@@ -86,6 +104,7 @@ const ContactSection = () => (
                 </div>
               </div>
 
+              {/* Phone Contact */}
               <div className="flex items-start space-x-4">
                 <div className="flex items-center justify-center w-12 h-12 bg-primary-600/20 rounded-xl">
                   <PhoneIcon className="h-6 w-6 text-primary-400" />
@@ -97,6 +116,7 @@ const ContactSection = () => (
                 </div>
               </div>
 
+              {/* Office Address */}
               <div className="flex items-start space-x-4">
                 <div className="flex items-center justify-center w-12 h-12 bg-primary-600/20 rounded-xl">
                   <MapPinIcon className="h-6 w-6 text-primary-400" />
@@ -110,6 +130,7 @@ const ContactSection = () => (
             </div>
           </div>
 
+          {/* Quick Support Section */}
           <div className="bg-gradient-to-r from-primary-600/10 to-primary-700/10 rounded-2xl p-8 border border-primary-600/20">
             <h4 className="text-xl font-display font-bold text-gray-100 mb-4">
               Quick Support
@@ -137,21 +158,25 @@ const ContactSection = () => (
 
             <form className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {/* First Name Input */}
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-200 font-display">
+                  <label htmlFor="firstName" className="block text-sm font-semibold text-gray-200 font-display">
                     First Name
                   </label>
                   <input
+                    id="firstName"
                     type="text"
                     className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 font-body"
                     placeholder="John"
                   />
                 </div>
+                {/* Last Name Input */}
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-200 font-display">
+                  <label htmlFor="lastName" className="block text-sm font-semibold text-gray-200 font-display">
                     Last Name
                   </label>
                   <input
+                    id="lastName"
                     type="text"
                     className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 font-body"
                     placeholder="Doe"
@@ -159,22 +184,28 @@ const ContactSection = () => (
                 </div>
               </div>
 
+              {/* Email Address Input */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-200 font-display">
+                <label htmlFor="email" className="block text-sm font-semibold text-gray-200 font-display">
                   Email Address
                 </label>
                 <input
+                  id="email"
                   type="email"
                   className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 font-body"
                   placeholder="john@example.com"
                 />
               </div>
 
+              {/* Subject Select */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-200 font-display">
+                <label htmlFor="subject" className="block text-sm font-semibold text-gray-200 font-display">
                   Subject
                 </label>
-                <select className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 font-body">
+                <select
+                  id="subject"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 font-body"
+                >
                   <option value="">Select a topic</option>
                   <option value="general">General Inquiry</option>
                   <option value="support">Technical Support</option>
@@ -184,17 +215,20 @@ const ContactSection = () => (
                 </select>
               </div>
 
+              {/* Message Textarea */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-200 font-display">
+                <label htmlFor="message" className="block text-sm font-semibold text-gray-200 font-display">
                   Message
                 </label>
                 <textarea
+                  id="message"
                   rows={6}
                   className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 resize-none font-body"
                   placeholder="Tell us how we can help you..."
                 />
               </div>
 
+              {/* Send Message Button */}
               <Button
                 type="submit"
                 fullWidth
@@ -212,6 +246,7 @@ const ContactSection = () => (
   </section>
 );
 
+// Array of testimonial quotes
 const quotes = [
   {
     quote: "StudyBuddy transformed my learning experience. Finding study partners who share my passion for computer science has made studying so much more engaging and effective.",
@@ -245,79 +280,109 @@ const quotes = [
   }
 ];
 
+/**
+ * Landing component serves as the main landing page for the StudyBuddy application.
+ * It features a hero section, feature highlights, testimonials, a call to action, and a contact section.
+ */
 export default function Landing() {
-  const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [displayedQuotes, setDisplayedQuotes] = useState([]);
-  const [activeSection, setActiveSection] = useState('home');
+  const navigate = useNavigate(); // React Router hook for navigation
+  const [currentUser, setCurrentUser] = useState(null); // State to store the current authenticated user
+  const [loading, setLoading] = useState(true); // State to manage initial loading of user data
+  const [displayedQuotes, setDisplayedQuotes] = useState([]); // State to store randomly selected quotes
+  const [activeSection, setActiveSection] = useState('home'); // State to track the currently active section for navigation highlighting
 
+  /**
+   * Effect hook to check for user authentication token on component mount.
+   * If no token is found, it redirects to the login page.
+   * If a token exists, it fetches the current user's profile.
+   */
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-      navigate('/login');
+      navigate('/login'); // Redirect to login if not authenticated
       return;
     }
 
-    // Fetch current user
+    setLoading(true); // Set loading to true before fetching user data
     fetch('/api/users/me', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          setCurrentUser(data.user);
+          setCurrentUser(data.user); // Set current user data if fetch is successful
+        } else {
+          console.error('Failed to fetch current user:', data.error);
+          // Optionally, handle specific errors like expired token by redirecting to login
         }
-        setLoading(false);
+        setLoading(false); // Set loading to false after fetch attempt
       })
-      .catch(() => setLoading(false));
-  }, [navigate]);
+      .catch((err) => {
+        console.error('Error fetching current user:', err);
+        setLoading(false); // Ensure loading is false even on error
+      });
+  }, [navigate]); // Dependency array ensures effect runs only when navigate changes
 
+  /**
+   * Effect hook to randomly select 3 quotes from the `quotes` array on component mount.
+   */
   useEffect(() => {
-    // Randomly select 3 quotes to display
-    const shuffled = [...quotes].sort(() => 0.5 - Math.random());
-    setDisplayedQuotes(shuffled.slice(0, 3));
-  }, []);
+    const shuffled = [...quotes].sort(() => 0.5 - Math.random()); // Shuffle the quotes array
+    setDisplayedQuotes(shuffled.slice(0, 3)); // Select the first 3 quotes
+  }, []); // Empty dependency array ensures this runs only once on mount
 
-  // Define scrollToSection here so it can be passed down
+  /**
+   * Scrolls the window smoothly to the specified section ID.
+   * Also updates the `activeSection` state.
+   * @param {string} sectionId - The ID of the HTML section to scroll to.
+   */
   const scrollToSection = (sectionId) => {
-    setActiveSection(sectionId);
+    setActiveSection(sectionId); // Update active section state
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth' }); // Smooth scroll to the element
     }
   };
 
-  // Handle scroll to update active section
+  /**
+   * Effect hook to handle scroll events and update the `activeSection` based on scroll position.
+   * This is used for highlighting navigation links as the user scrolls.
+   */
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'contact'];
-      const scrollPosition = window.scrollY + 100;
+      const sections = ['home', 'about', 'contact']; // IDs of sections to observe
+      const scrollPosition = window.scrollY + 100; // Add offset for better active state detection
 
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const { offsetTop, offsetHeight } = element;
+          // Check if the current scroll position is within the bounds of the section
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
+            setActiveSection(section); // Set the current section as active
+            break; // Exit loop once the active section is found
           }
         }
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('scroll', handleScroll); // Add scroll event listener
+    return () => window.removeEventListener('scroll', handleScroll); // Clean up event listener on unmount
+  }, []); // Empty dependency array ensures this runs only once on mount
 
+  /**
+   * Handles the "Discover" button click.
+   * Navigates to '/home' if the user's profile is complete, otherwise to '/profile-complete'.
+   */
   const handleDiscover = () => {
     if (currentUser && currentUser.profileComplete) {
-      navigate('/home');
+      navigate('/home'); // Navigate to main app if profile is complete
     } else {
-      navigate('/profile-complete');
+      navigate('/profile-complete'); // Navigate to profile completion if not complete
     }
   };
 
+  // Display a loading spinner while user data is being fetched
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-900">
@@ -332,24 +397,11 @@ export default function Landing() {
   return (
     <Layout user={currentUser}>
       <div className="min-h-screen bg-gray-900 relative overflow-hidden">
-        {/* Particles Background Container */}
-        {/* This div positions the Particles component to fill the entire viewport */}
-        <div className="fixed inset-0 z-0">
-          <Particles
-            particleColors={['#ffffff', '#ffffff']} // White particles
-            particleCount={200}
-            particleSpread={10}
-            speed={0.1}
-            particleBaseSize={100}
-            moveParticlesOnHover={true}
-            particleHoverFactor={1}
-            alphaParticles={false}
-            disableRotation={false}
-          />
-        </div>
+        {/* Particles background animation */}
+        <Particles className="absolute inset-0 z-0" />
 
         {/* Main Content Container */}
-        <div className="relative z-10 bg-gray-900/90">
+        <div className="relative z-10">
           {/* Hero Section */}
           <section id="home" className="py-24 lg:py-32">
             <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
@@ -406,7 +458,7 @@ export default function Landing() {
           </section>
 
           {/* About/Features Section */}
-          <section id="about" className="py-24 bg-gray-800/30">
+          <section id="about" className="py-24 bg-gray-800/30 grid-bg-subtle">
             <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
               <div className="text-center mb-20 animate-fade-in-up">
                 <h2 className="text-5xl font-display font-bold text-gray-100 mb-8">
@@ -493,13 +545,13 @@ export default function Landing() {
                           icon={UserGroupIcon}
                           className="shadow-medium text-lg px-12 py-6"
                         >
-                          View Messages
+                          View Matches
                         </Button>
                       )}
                     </div>
 
                     <div className="text-sm text-gray-400 flex items-center justify-center space-x-2 font-body mt-6">
-                      <HeartSolidIcon className="h-5 w-5 text-primary-500" />
+                      <BookOpenSolidIcon className="h-5 w-5 text-primary-500" />
                       <span>Join 10,000+ students already studying together</span>
                     </div>
                   </Card.Body>
@@ -509,15 +561,15 @@ export default function Landing() {
           </section>
 
           {/* Contact Section */}
-          <ContactSection />
+          <ContactSection /> {/* Render the ContactSection component here */}
 
           {/* Footer */}
-          <footer className="bg-gray-900/80 backdrop-blur-xl border-t border-primary-600/30 py-16">
+          <footer className="bg-gray-900/80 backdrop-blur-xl border-t border-primary-600/30 py-16 grid-bg">
             <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
               <div className="text-center space-y-6">
                 <div className="flex items-center justify-center space-x-4">
                   <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-primary-600 to-primary-700 rounded-xl">
-                    <HeartIcon className="h-6 w-6 text-white" />
+                    <BookOpenIcon className="h-6 w-6 text-white" />
                   </div>
                   <span className="text-2xl font-display font-bold gradient-text">StudyBuddy</span>
                 </div>

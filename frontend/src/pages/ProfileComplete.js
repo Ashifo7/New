@@ -7,9 +7,8 @@ import {
   CheckCircleIcon,
   ExclamationTriangleIcon,
   GlobeAltIcon,
-  HeartIcon,
-  SparklesIcon,
   BookOpenIcon,
+  SparklesIcon,
   ChatBubbleLeftRightIcon,
   UserGroupIcon,
   AcademicCapIcon,
@@ -363,7 +362,7 @@ export default function ProfileComplete() {
         showMessage('Profile saved successfully!', 'success');
         // Auto-navigate to home if profile is substantially complete
         if (completionPercentage >= 70) {
-          setTimeout(() => navigate('/home'), 2000);
+          setTimeout(() => navigate('/landing'), 2000);
         }
       } else {
         showMessage(data.error || 'Error saving profile', 'error');
@@ -406,7 +405,7 @@ export default function ProfileComplete() {
   if (loading) {
     return (
       <Layout user={user}>
-        <div className="flex items-center justify-center min-h-96 bg-gray-900">
+        <div className="flex items-center justify-center min-h-96 bg-gray-900 grid-bg">
           <div className="text-center space-y-4">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
             <p className="text-gray-200 font-body">Loading your profile...</p>
@@ -925,7 +924,7 @@ export default function ProfileComplete() {
             <Card className="animate-fade-in-up">
               <Card.Header gradient>
                 <div className="flex items-center space-x-2">
-                  <HeartIcon className="h-5 w-5 text-gray-200" />
+                  <BookOpenIcon className="h-5 w-5 text-gray-200" />
                   <h3 className="text-lg font-semibold text-gray-100 font-display">Study Partner Preferences</h3>
                 </div>
               </Card.Header>

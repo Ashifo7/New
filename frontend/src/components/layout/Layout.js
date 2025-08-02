@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
-  HeartIcon,
+  BookOpenIcon,
   HomeIcon,
   ChatBubbleLeftRightIcon,
   UserIcon,
@@ -31,7 +31,7 @@ const Layout = ({ children, user }) => {
   const navigationItems = [
     {
       id: 'home',
-      label: 'Home',
+      label: 'Discover',
       path: '/home',
       icon: HomeIcon,
       solidIcon: HomeSolidIcon,
@@ -95,9 +95,9 @@ const Layout = ({ children, user }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-gray-900 grid-bg">
       {/* Navigation Bar */}
-      <nav className="bg-gray-800/95 backdrop-blur-xl border-b border-primary-600/30 sticky top-0 z-50 shadow-large">
+      <nav className="bg-gray-800/95 backdrop-blur-xl border-b border-primary-600/30 sticky top-0 z-50 shadow-large relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -106,7 +106,7 @@ const Layout = ({ children, user }) => {
               onClick={() => navigate('/landing')}
             >
               <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-primary-600 to-primary-700 rounded-xl shadow-medium group-hover:shadow-glow transition-all duration-300">
-                <HeartIcon className="h-6 w-6 text-white" />
+                <BookOpenIcon className="h-6 w-6 text-white" />
               </div>
               <div>
                 <h1 className="text-xl font-bold gradient-text font-display">StudyBuddy</h1>
