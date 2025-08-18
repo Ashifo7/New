@@ -82,6 +82,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👤 Maintainer
 
 - [Rohan Lobo](https://github.com/Rohanlobo15)
+- [Mohammed Ashif R](https://github.com/Ashifo7)
 
 ---
 
